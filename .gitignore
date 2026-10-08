@@ -1,4 +1,4 @@
-   target/
-   nbproject/private/
-   derby.log
-   .DS_Store
+target/
+nbproject/private/
+derby.log
+.DS_Store
