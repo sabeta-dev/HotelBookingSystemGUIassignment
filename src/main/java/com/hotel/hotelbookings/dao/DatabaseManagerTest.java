@@ -14,6 +14,8 @@ public class DatabaseManagerTest {
         DatabaseManager db = DatabaseManager.getInstance();
         System.out.println("Connection: " + db.getConnection());
         System.out.println("ROOMS exists: " + db.tableExists("ROOMS"));
+        System.out.println("BOOKINGS exists: " + db.tableExists("BOOKINGS"));
+        System.out.println("GUESTS exists: " + db.tableExists("GUESTS"));
         db.closeConnection();
     }
     }

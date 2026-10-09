@@ -22,7 +22,7 @@ public class DatabaseManager {
     
     private static final String url = "jdbc:derby:HotelDB;create=true";
     
-    Connection conn;
+    private Connection conn;
     private DatabaseManager() {
         establishHotelDBconnection();
         createTableIfMissing();
@@ -39,7 +39,7 @@ public class DatabaseManager {
         
     }
     
-    public void establishHotelDBconnection()
+    private void establishHotelDBconnection()
     {
         try{
             conn = DriverManager.getConnection(url);
@@ -71,7 +71,7 @@ public class DatabaseManager {
         
              
     }
-    public void createTableIfMissing()
+    private void createTableIfMissing()
     {
         try(Statement statement = conn.createStatement()){
             if (!tableExists("ROOMS"))
@@ -83,6 +83,24 @@ public class DatabaseManager {
                         "PRICE DOUBLE NOT NULL, CAPACITY INT NOT NULL, "
                         + "AVAILABLE BOOLEAN NOT NULL)");
             }
+            if (!tableExists("GUESTS"))
+            {
+                statement.executeUpdate(
+                "CREATE TABLE GUESTS "+" "
+                        + "(GUEST_ID VARCHAR(10) PRIMARY KEY,"+
+                        "NAME VARCHAR(100) NOT NULL,"+
+                        "EMAIL VARCHAR(100) NOT NULL, PHONE VARCHAR(20) NOT NULL)");
+            }
+            if (!tableExists("BOOKINGS"))
+            {
+                statement.executeUpdate(
+                "CREATE TABLE BOOKINGS "+" "
+                        + "(BOOKING_ID VARCHAR(10) PRIMARY KEY,"+
+                        "START_DATE VARCHAR(10) NOT NULL,"+
+                        "END_DATE VARCHAR(10) NOT NULL, BOOKING_STATUS VARCHAR(20) NOT NULL, "+
+                        "GUEST_ID VARCHAR(10) NOT  NULL , ROOM_NUMBER INT NOT NULL, FOREIGN KEY (GUEST_ID) REFERENCES GUESTS(GUEST_ID), FOREIGN KEY (ROOM_NUMBER) REFERENCES ROOMS(ROOM_NUMBER))");
+            }
+            
              
         }
         catch (SQLException ex){
