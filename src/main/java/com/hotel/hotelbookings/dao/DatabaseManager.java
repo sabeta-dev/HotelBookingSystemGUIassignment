@@ -89,7 +89,7 @@ public class DatabaseManager {
                 "CREATE TABLE GUESTS "+" "
                         + "(GUEST_ID VARCHAR(10) PRIMARY KEY,"+
                         "NAME VARCHAR(100) NOT NULL,"+
-                        "EMAIL VARCHAR(100) NOT NULL, PHONE VARCHAR(20) NOT NULL)");
+                        "EMAIL VARCHAR(100) NOT NULL, PHONE VARCHAR(20) NOT NULL, LOYALTY_POINTS INT NOT NULL)");
             }
             if (!tableExists("BOOKINGS"))
             {
