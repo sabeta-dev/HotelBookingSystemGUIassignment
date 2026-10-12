@@ -16,7 +16,7 @@ public class Suite extends Room {
 
     @Override
     public double calculatePrice(int nights) {
-        return Math.round(nights * (getPricePerNight() * (1 + (0.)))*100)/100.0;
+        return Math.round(nights * (getPricePerNight() * (1 + (0.25)))*100)/100.0;
 
     }
 
