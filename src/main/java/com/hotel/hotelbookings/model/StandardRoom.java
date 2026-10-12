@@ -28,7 +28,7 @@ public class StandardRoom extends Room {
     }
 
     public String getRoomDetails() {
-        return "Standard room("+ getRoomNumber()+"), "  + getIsAvailable() + ", this room has a capacity of " + getCapacity() + " availble for $" + getPricePerNight() + " per night";
+        return "Standard room("+ getRoomNumber()+"), "  + getIsAvailable() + ", this room has a capacity of " + getCapacity() + " available for $" + getPricePerNight() + " per night";
     }
     
 }

@@ -29,7 +29,7 @@ public class DeluxeRoom extends Room {
     }
     
     public String getRoomDetails() {
-        return "Deluxe room("+ getRoomNumber()+"), "  + getIsAvailable() + ", this room has a capacity of " + getCapacity() + " availble for $" + getPricePerNight() + " per night";
+        return "Deluxe room("+ getRoomNumber()+"), "  + getIsAvailable() + ", this room has a capacity of " + getCapacity() + " available for $" + getPricePerNight() + " per night";
     }
     
 

@@ -29,5 +29,28 @@ public class ModelTest {
         System.out.println("Booking " + booking.getBookingId() + " status: " + booking.getStatus());
         System.out.println("Booking total for 3 nights: $" + booking.calculateTotalCost(3));
         System.out.println("History size: " + guest.getBookingHistory().size());
+        // RoomFactory tests
+        System.out.println("--- RoomFactory ---");
+        String[] types = {"Standard", "Deluxe", "Suite", "deluxe", "SUITE"};
+        for (String type : types) {
+            Room room = RoomFactory.createRoom(type, 400, 100.0, 2);
+            System.out.println("Asked for \"" + type + "\" -> got "
+                    + room.getClass().getSimpleName()
+                    + " (getRoomType: " + room.getRoomType() + ")");
+        }
+
+        try {
+            RoomFactory.createRoom("Penthouse", 401, 100.0, 2);
+            System.out.println("FAILED: Penthouse was accepted");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Penthouse rejected: " + e.getMessage());
+        }
+
+        try {
+            RoomFactory.createRoom(null, 402, 100.0, 2);
+            System.out.println("FAILED: null was accepted");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Null rejected: " + e.getMessage());
+        }
     }
 }
