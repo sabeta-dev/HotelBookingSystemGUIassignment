@@ -1,4 +1,4 @@
-package TestPackage;
+package com.hotel.hotelbookings.model;
 
 import com.hotel.hotelbookings.dao.BookingDAO;
 import com.hotel.hotelbookings.dao.BookingDAOImpl;

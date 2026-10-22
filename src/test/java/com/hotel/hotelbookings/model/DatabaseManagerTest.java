@@ -1,4 +1,4 @@
-package TestPackage;
+package com.hotel.hotelbookings.model;
 
 import com.hotel.hotelbookings.dao.DatabaseManager;
 import java.sql.Connection;
