@@ -1,5 +1,20 @@
 package com.hotel.hotelbookings.model;
 
+import com.hotel.hotelbookings.model.Booking;
+import com.hotel.hotelbookings.model.Booking;
+import com.hotel.hotelbookings.model.DeluxeRoom;
+import com.hotel.hotelbookings.model.DeluxeRoom;
+import com.hotel.hotelbookings.model.Guest;
+import com.hotel.hotelbookings.model.Guest;
+import com.hotel.hotelbookings.model.Room;
+import com.hotel.hotelbookings.model.Room;
+import com.hotel.hotelbookings.model.RoomFactory;
+import com.hotel.hotelbookings.model.RoomFactory;
+import com.hotel.hotelbookings.model.StandardRoom;
+import com.hotel.hotelbookings.model.StandardRoom;
+import com.hotel.hotelbookings.model.Suite;
+import com.hotel.hotelbookings.model.Suite;
+
 public class ModelTest {
 
     public static void main(String[] args) {
