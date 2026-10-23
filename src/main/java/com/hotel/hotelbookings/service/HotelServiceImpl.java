@@ -132,4 +132,34 @@ public class HotelServiceImpl implements HotelService {
         }
         return String.format("B%03d", max + 1);
     }
+
+    @Override
+    public void updateBooking(String bookingId, String newCheckIn, String newCheckOut) {
+        Booking booking = bookingDAO.findById(bookingId);
+        if (booking == null) {
+            throw new BookingException("Booking " + bookingId + " not found");
+        }
+        if ("Cancelled".equals(booking.getStatus())) {
+            throw new BookingException("A cancelled booking cannot be changed");
+        }
+        calculateNights(newCheckIn, newCheckOut);
+        bookingDAO.updateDates(bookingId, newCheckIn, newCheckOut);
+    }
+
+    @Override
+    public void updateBookingStatus(String bookingId, String newStatus) {
+        Booking booking = bookingDAO.findById(bookingId);
+        if (booking == null) {
+            throw new BookingException("Booking " + bookingId + " not found");
+        }
+        if ("Cancelled".equals(booking.getStatus())) {
+            throw new BookingException("A cancelled booking cannot be changed");
+        }
+        bookingDAO.updateStatus(bookingId, newStatus);
+        if ("Checked-out".equals(newStatus)) {
+            Room room = booking.getRoom();
+            room.setIsAvailable(true);
+            roomDAO.update(room);
+        }
+    }
 }

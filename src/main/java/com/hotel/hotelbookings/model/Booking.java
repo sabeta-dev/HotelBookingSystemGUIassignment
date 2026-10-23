@@ -57,6 +57,10 @@ public class Booking {
     public void setCheckOutDate(String checkOutDate) {
         this.checkOutDate = checkOutDate;
     }
+    
+    public void setCheckInDate(String checkInDate) {
+        this.checkInDate = checkInDate;
+    }
 
         
     public double calculateTotalCost(int nights)

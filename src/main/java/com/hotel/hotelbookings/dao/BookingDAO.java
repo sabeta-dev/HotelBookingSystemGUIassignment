@@ -23,6 +23,10 @@ public interface BookingDAO {
     void add(Booking booking);
 
     void updateStatus(String bookingId, String status);
+    
+    void updateDates(String bookingId, String checkIn, String checkOut);
 
     void delete(String bookingId);
+    
+    
 }

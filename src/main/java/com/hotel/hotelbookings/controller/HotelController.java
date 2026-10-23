@@ -58,4 +58,12 @@ public class HotelController {
     public double getBookingCost(Booking booking) {
         return service.calculateBookingCost(booking);
     }
+
+    public void updateBooking(String bookingId, String newCheckIn, String newCheckOut) {
+        service.updateBooking(bookingId, newCheckIn, newCheckOut);
+    }
+
+    public void updateBookingStatus(String bookingId, String newStatus) {
+        service.updateBookingStatus(bookingId, newStatus);
+    }
 }

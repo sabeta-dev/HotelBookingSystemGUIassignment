@@ -26,4 +26,8 @@ public interface HotelService {
     void cancelBooking(String bookingId);
 
     Guest addGuest(String id, String name, String phone, String email);
+
+    public void updateBooking(String bookingId, String newCheckIn, String newCheckOut);
+
+    void updateBookingStatus(String bookingId, String newStatus);
 }

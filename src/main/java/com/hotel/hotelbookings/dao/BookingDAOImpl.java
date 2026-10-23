@@ -50,8 +50,7 @@ public class BookingDAOImpl implements BookingDAO {
     public List<Booking> findAll() {
         List<Booking> bookings = new ArrayList<>();
         String sqlQuery = SELECT_COLUMNS + "ORDER BY BOOKING_ID";
-        try (Statement statement = conn.createStatement();
-                ResultSet rs = statement.executeQuery(sqlQuery)) {
+        try (Statement statement = conn.createStatement(); ResultSet rs = statement.executeQuery(sqlQuery)) {
             while (rs.next()) {
                 bookings.add(mapRow(rs));
             }
@@ -145,6 +144,22 @@ public class BookingDAOImpl implements BookingDAO {
             }
         } catch (SQLException ex) {
             throw new IllegalStateException("Database error (could not delete booking): " + bookingId, ex);
+        }
+    }
+
+    @Override
+    public void updateDates(String bookingId, String checkIn, String checkOut) {
+        String sqlQuery = "UPDATE BOOKINGS SET START_DATE = ?, END_DATE = ? WHERE BOOKING_ID = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sqlQuery)) {
+            pstmt.setString(1, checkIn);
+            pstmt.setString(2, checkOut);
+            pstmt.setString(3, bookingId);
+            int affectedRow = pstmt.executeUpdate();
+            if (affectedRow == 0) {
+                throw new IllegalArgumentException("Booking " + bookingId + " does not exist.");
+            }
+        } catch (SQLException ex) {
+            throw new IllegalStateException("Database error (could not update dates): " + bookingId, ex);
         }
     }
 }
