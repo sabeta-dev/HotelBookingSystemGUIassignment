@@ -48,6 +48,7 @@ public class MainFrame extends JFrame {
         int frameHeight = screenHeight / 2;
         int frameWidth = screenWidth / 2;
         setSize(frameWidth, frameHeight);
+        setLocationRelativeTo(null);
         
 
         setLayout(new BorderLayout());
@@ -65,9 +66,11 @@ public class MainFrame extends JFrame {
         menu.add(roomsButton);
 
         JButton guestsButton = new JButton("Guests");
+        guestsButton.addActionListener(e -> openWindow("Guests", new GuestsPanel(controller)));
         menu.add(guestsButton);
 
         JButton bookingsButton = new JButton("Bookings");
+        bookingsButton.addActionListener(e -> openWindow("Bookings", new BookingPanel(controller)));
         menu.add(bookingsButton);
 
         add(menu, BorderLayout.CENTER);
