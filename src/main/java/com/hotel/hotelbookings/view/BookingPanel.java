@@ -70,7 +70,22 @@ public class BookingPanel extends JPanel {
 
         addButton.addActionListener(e
                 -> {
+            String newGuestId = null;
+            int isNew = JOptionPane.showConfirmDialog(this, "Is this a new guest?", "New booking", JOptionPane.YES_NO_CANCEL_OPTION);
+            if (isNew == JOptionPane.CANCEL_OPTION || isNew == JOptionPane.CLOSED_OPTION) {
+                return;
+            }
+            if (isNew == JOptionPane.YES_OPTION) {
+                newGuestId = promptNewGuest();
+                if (newGuestId == null) {
+                    return;
+                }
+            }
             JTextField guestField = new JTextField(15);
+            if (newGuestId != null) {
+                guestField.setText(newGuestId);
+                guestField.setEditable(false);
+            }
             JTextField roomField = new JTextField(15);
             JTextField checkInField = new JTextField("yyyy-MM-dd ", 15);
             JTextField checkOutField = new JTextField("yyyy-MM-dd", 15);
@@ -148,12 +163,40 @@ public class BookingPanel extends JPanel {
                 }
             }
         });
-                buttonPanel.add(updateButton);
+        buttonPanel.add(updateButton);
 
         refresh();
     }
 
-    
+    private String promptNewGuest() {
+        JTextField idField = new JTextField(15);
+        JTextField nameField = new JTextField(15);
+        JTextField phoneField = new JTextField(15);
+        JTextField emailField = new JTextField(15);
+
+        JPanel form = new JPanel(new GridLayout(4, 2, 5, 5));
+        form.add(new JLabel("Guest ID:"));
+        form.add(idField);
+        form.add(new JLabel("Name:"));
+        form.add(nameField);
+        form.add(new JLabel("Phone:"));
+        form.add(phoneField);
+        form.add(new JLabel("Email:"));
+        form.add(emailField);
+
+        int result = JOptionPane.showConfirmDialog(this, form, "New guest", JOptionPane.OK_CANCEL_OPTION);
+        if (result != JOptionPane.OK_OPTION) {
+            return null;
+        }
+        String id = idField.getText().trim();
+        try {
+            controller.addGuest(id, nameField.getText().trim(), phoneField.getText().trim(), emailField.getText().trim());
+            return id;
+        } catch (ValidationException | IllegalStateException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Cannot add guest", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+    }
 
     public void refresh() {
         tableModel.setRowCount(0);
@@ -170,4 +213,3 @@ public class BookingPanel extends JPanel {
 
     }
 }
-
